@@ -12,7 +12,7 @@ const Navbar = () => {
     <header className="w-full">
       <nav className=" flex justify-between items-center px-6 md:px-20 py-4">
         <Link href="/" className="flex items-center gap-1">
-          <Image src="/next.svg" width={27} height={27} alt="logo" />
+          <Image src="/logo.webp" width={27} height={27} alt="logo" />
           <p className="font-spaceGrotesk text-[21px] text-muted-background font-bold">
             Price<span className="text-primary">Peek</span>
           </p>
