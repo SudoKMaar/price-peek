@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
+import { scrapeAndStoreProduct } from "@/action/scrape-and-store-product";
 
 const isValidAmazonProductURL = (url: string) => {
   try {
@@ -48,10 +49,10 @@ export const Searchbar = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof SearchSchema>) => {
-    startTransition(() => {
+  const onSubmit = async (values: z.infer<typeof SearchSchema>) => {
+    startTransition(async () => {
       try {
-        alert(values);
+        const product = await scrapeAndStoreProduct(values.link);
       } catch (error) {
         console.log(error);
       } finally {
