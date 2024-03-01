@@ -29,7 +29,7 @@ export async function scrapeAmazonProduct(url: string) {
       $(".priceToPay span.a-price-whole"),
       $(".a.size.base.a-color-price"),
       $(".a-button-selected .a-color-base"),
-      $(".a-price .a-text-price")
+      $(".a-price.a-text-price")
     );
 
     const originalPrice = extractPrice(
@@ -39,6 +39,9 @@ export async function scrapeAmazonProduct(url: string) {
       $("#priceblock_dealprice"),
       $(".a-size-base.a-color-price")
     );
+    const category = $("#variation_pattern_name .a-row span.selection")
+      .text()
+      .trim();
 
     const outOfStock =
       $("#availability span").text().trim().toLowerCase() ===
@@ -65,7 +68,7 @@ export async function scrapeAmazonProduct(url: string) {
       originalPrice: Number(originalPrice) || Number(currentPrice),
       priceHistory: [],
       discountRate: Number(discountRate),
-      category: "category",
+      category: category || "category",
       reviewsCount: 100,
       stars: 4.5,
       isOutOfStock: outOfStock,

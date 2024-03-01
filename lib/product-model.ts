@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import { Model } from "mongoose";
+import { Product as pTypes } from "@/index";
 
-const productSchema = new mongoose.Schema(
+const productSchema = new mongoose.Schema<pTypes>(
   {
     url: { type: String, required: true, unique: true },
     currency: { type: String, required: true },
@@ -23,12 +25,18 @@ const productSchema = new mongoose.Schema(
     reviewsCount: { type: Number },
     isOutOfStock: { type: Boolean, default: false },
     users: [{ email: { type: String, required: true } }],
+    //@ts-ignore
     default: [],
   },
   { timestamps: true }
 );
 
-const Product =
-  mongoose.models.Product || mongoose.model("Product", productSchema);
+let Product: Model<pTypes>;
+
+try {
+  Product = mongoose.model("Product") as Model<pTypes>;
+} catch {
+  Product = mongoose.model("Product", productSchema) as Model<pTypes>;
+}
 
 export default Product;

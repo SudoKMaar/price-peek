@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { Searchbar } from "@/components/searchbar";
+import { getAllProducts } from "@/action/get-all-products";
+import ProductCard from "@/components/product-card";
 
-export default function Home() {
+export default async function Home() {
+  const allProducts = await getAllProducts();
   return (
     <main>
       <section className="w-full py-6 md:py-12 lg:py-24 xl:py-32">
@@ -37,6 +40,11 @@ export default function Home() {
         <h2 className="text-muted-background text-[32px] font-semibold">
           Trending
         </h2>
+        <div className="flex flex-wrap gap-x-8 gap-y-16">
+          {allProducts?.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
       </section>
     </main>
   );
