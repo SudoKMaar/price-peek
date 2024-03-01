@@ -11,7 +11,7 @@ import {
 import Product from "@/lib/product-model";
 import { generateEmailBody, sendEmail } from "@/action/nodemailer";
 
-export const maxDuration = 300;
+export const maxDuration = 10;
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
