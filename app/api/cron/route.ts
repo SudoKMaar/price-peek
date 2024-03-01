@@ -57,8 +57,8 @@ export async function GET(request: Request) {
 
         if (emailNotifType && updatedProduct.users.length > 0) {
           const productInfo = {
-            title: updatedProduct?.title,
-            url: updatedProduct?.url,
+            title: updatedProduct.title,
+            url: updatedProduct.url,
           };
           const emailContent = await generateEmailBody(
             productInfo,
